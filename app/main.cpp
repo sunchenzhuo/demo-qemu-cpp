@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:29:50
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-29 14:00:36
+ * @最后编辑时间       : 2026-05-29 14:10:18
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -20,6 +20,14 @@
 #include <chrono>
 #include <thread>
 
+std::string stripLineEnd(std::string text)
+{
+    if (!text.empty() && (text.back() == '\n' || text.back() == '\r'))
+    {
+        text.pop_back();
+    }
+    return text;
+}
 /**
  * @brief 执行一次完整的客户端通信流程。
  *
@@ -58,7 +66,7 @@ bool sendOnce(const AppConfig &cfg, Logger &logger, int seq)
         return false;
     }
     // 记录发送日志，TX 表示 transmit，即发送数据
-    logger.info("TX:" + cmd);
+    logger.info("TX:" + stripLineEnd(cmd));
 
     // 发送控制命令
     if (!client.sendText(cmd))
@@ -73,7 +81,7 @@ bool sendOnce(const AppConfig &cfg, Logger &logger, int seq)
     }
 
     // 记录接收日志，RX 表示 receive，即接收数据
-    logger.info("RX:" + response);
+    logger.info("RX:" + stripLineEnd(response));
 
     // 定义状态对象，用于保存解析后的响应结果
     Status status;
@@ -102,7 +110,7 @@ bool sendOnce(const AppConfig &cfg, Logger &logger, int seq)
         << " ,battery_voltage=" << status.bettery_voltage
         << " ,err=" << errToText(status.err);
 
-    logger.warn(oss.str());
+    logger.info(oss.str());
 
     // err == 1 表示低电压告警
     if (status.err == 1)
@@ -119,6 +127,7 @@ bool sendOnce(const AppConfig &cfg, Logger &logger, int seq)
     // 本次通信流程完成
     return true;
 }
+
 /**
  * @brief 程序入口函数。
  *

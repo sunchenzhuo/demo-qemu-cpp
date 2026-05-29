@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:30:51
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-28 12:01:03
+ * @最后编辑时间       : 2026-05-29 09:22:55
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -19,7 +19,7 @@ std::string buildCommand(const AppConfig &cfg, int seq)
 {
     std::ostringstream oss;
 
-    oss << "CMD"
+    oss << "CMD "
         << seq << " "
         << std::fixed << std::setprecision(2)
         << cfg.vx << " "
@@ -54,7 +54,7 @@ std::string errToText(int err)
     case 1:
         return "LOW_BATTERY"; // 低电压/低电量告警
     case 2:
-        return "BAD_COMMOND"; // 错误命令
+        return "BAD_COMMAND"; // 错误命令
     case 3:
         return "SPEED_LIMIT"; // 发送的速度超过安全范围，服务端拒绝执行
     default:

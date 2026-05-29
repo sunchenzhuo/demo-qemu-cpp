@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:30:12
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-28 11:06:00
+ * @最后编辑时间       : 2026-05-29 10:55:16
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -91,7 +91,7 @@ bool loadConfig(const std::string &path, AppConfig &cfg)
         }
         else if (key == "log_file")
         {
-            cfg.log_fileh = value;
+            cfg.log_file = value;
         }
         else if (key == "crash_after")
         {
@@ -126,7 +126,7 @@ void printConfig(const AppConfig &cfg)
     std::cout << "vx:" << cfg.vx << std::endl;
     std::cout << "vy:" << cfg.vy << std::endl;
     std::cout << "wz:" << cfg.wz << std::endl;
-    std::cout << "log_file:" << cfg.log_fileh << std::endl;
+    std::cout << "log_file:" << cfg.log_file << std::endl;
     std::cout << "crash_after:" << cfg.crash_after << std::endl;
     std::cout << "max_fail_count:" << cfg.max_fail_count << std::endl;
     std::cout << "safe_vx:" << cfg.safe_vx << std::endl;

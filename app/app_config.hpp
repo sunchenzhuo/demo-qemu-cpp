@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:30:01
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-29 10:50:07
+ * @最后编辑时间       : 2026-05-29 16:39:04
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -18,7 +18,7 @@
 struct AppConfig
 {
     std::string server_ip = "127.0.0.1"; // 服务器 IP，默认指向主机
-    int server_port = 7000;              // 服务器端口
+    int server_port = 17000;             // 服务器端口
     int period_ms = 2000;                // 周期（毫秒）：客户端发送/轮询的时间间隔
 
     // 运动控制量（线速度 vx, vy，角速度 wz）

@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:29:50
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-29 13:54:01
+ * @最后编辑时间       : 2026-05-29 14:00:36
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -99,7 +99,7 @@ bool sendOnce(const AppConfig &cfg, Logger &logger, int seq)
     oss << "status vx=" << status.vx
         << " ,vy=" << status.vy
         << " ,wz=" << status.wz
-        << " ,batter_voltage=" << status.better_voltage
+        << " ,battery_voltage=" << status.bettery_voltage
         << " ,err=" << errToText(status.err);
 
     logger.warn(oss.str());
@@ -108,7 +108,7 @@ bool sendOnce(const AppConfig &cfg, Logger &logger, int seq)
     if (status.err == 1)
     {
         std::ostringstream warn;
-        warn << "low battery:" << status.better_voltage;
+        warn << "low battery:" << status.bettery_voltage;
         logger.warn(warn.str());
     }
     // err != 0 表示存在其他底盘错误
@@ -162,7 +162,7 @@ int main(int argc, char const *argv[])
     // 根据配置文件中的日志路径创建日志对象
     Logger logger(cfg.log_file);
     // 记录程序启动日志
-    logger.info("bad client cpp started");
+    logger.info("base client cpp started");
     // 打印当前配置，方便启动时确认配置是否正确
     printConfig(cfg);
 
@@ -228,7 +228,7 @@ int main(int argc, char const *argv[])
             {
                 std::ostringstream oss;
                 oss << "communication recovered at seq=" << seq
-                    << " after" << fail_count << "failures";
+                    << " after " << fail_count << " failures";
                 logger.info(oss.str());
             }
 

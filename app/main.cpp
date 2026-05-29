@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:29:50
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-29 09:23:12
+ * @最后编辑时间       : 2026-05-29 10:52:26
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -12,9 +12,11 @@
 #include "app_config.hpp"
 #include "protocol.hpp"
 #include "tcp_client.hpp"
+#include "logger.hpp"
 
 #include <string>
 #include <iostream>
+#include <sstream>
 
 int main(int argc, char const *argv[])
 {
@@ -60,19 +62,22 @@ int main(int argc, char const *argv[])
     std::cout << "RX:" << response;
 
     Status status;
+    Logger logger(cfg.log_file);
+    logger.info("base client cpp started");
 
     if (!parseStatus(response, status))
     {
         std::cerr << "bad response format" << std::endl;
         return 1;
     }
-    std::cout << "STATUS:"
-              << "vx=" << status.vx
-              << ",vy=" << status.vy
-              << ",wz=" << status.wz
-              << ",battery_voltage=" << status.better_voltage
-              << ",err=" << errToText(status.err)
-              << std::endl;
+    std::ostringstream oss;
+    oss << "STATUS vx=" << status.vx
+        << ",vy=" << status.vy
+        << ",wz=" << status.wz
+        << ",battery_voltage=" << status.better_voltage
+        << ",err=" << errToText(status.err)
+        << std::endl;
+    logger.info(oss.str());
 
     return 0;
 }

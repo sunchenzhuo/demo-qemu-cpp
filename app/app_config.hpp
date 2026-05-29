@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:30:01
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-28 11:10:50
+ * @最后编辑时间       : 2026-05-29 10:50:07
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -27,9 +27,9 @@ struct AppConfig
     double vy = 0.00; // 侧向速度（m/s），默认无侧向运动
     double wz = 0.20; // 角速度（rad/s）
 
-    std::string log_fileh = "/var/log/client_log.log"; // 日志文件路径，客户端将日志写入此文件（需要有写权限）
-    int crash_after = -1;                              // 在多少次循环后模拟崩溃。-1 表示不触发崩溃。
-    int max_fail_count = 3;                            // 最大失败重试次数（例如网络发送失败）
+    std::string log_file = "/var/log/client_log.log"; // 日志文件路径，客户端将日志写入此文件（需要有写权限）
+    int crash_after = -1;                             // 在多少次循环后模拟崩溃。-1 表示不触发崩溃。
+    int max_fail_count = 3;                           // 最大失败重试次数（例如网络发送失败）
 
     // 安全速度：在出现故障或进入安全模式时使用的速度（通常设为 0）
     double safe_vx = 0.00;

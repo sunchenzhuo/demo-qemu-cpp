@@ -58,3 +58,155 @@
 2026-05-29 14:05:22 [INFO] RX:STA 3 0.30 0.00 0.50 12.17 0
 
 2026-05-29 14:05:22 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.17 ,err=OK
+2026-05-29 14:14:02 [INFO] base client cpp started
+2026-05-29 14:14:02 [INFO] TX:CMD 0 0.30 0.00 0.50
+2026-05-29 14:14:02 [INFO] RX:STA 0 0.30 0.00 0.50 12.16 0
+2026-05-29 14:14:02 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.16 ,err=OK
+2026-05-29 14:14:03 [INFO] TX:CMD 1 0.30 0.00 0.50
+2026-05-29 14:14:03 [INFO] RX:STA 1 0.30 0.00 0.50 12.15 0
+2026-05-29 14:14:03 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.15 ,err=OK
+2026-05-29 14:14:04 [INFO] TX:CMD 2 0.30 0.00 0.50
+2026-05-29 14:14:04 [INFO] RX:STA 2 0.30 0.00 0.50 12.14 0
+2026-05-29 14:14:04 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.14 ,err=OK
+2026-05-29 14:14:05 [INFO] TX:CMD 3 0.30 0.00 0.50
+2026-05-29 14:14:05 [INFO] RX:STA 3 0.30 0.00 0.50 12.13 0
+2026-05-29 14:14:05 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.13 ,err=OK
+2026-05-29 14:14:06 [INFO] TX:CMD 4 0.30 0.00 0.50
+2026-05-29 14:14:06 [INFO] RX:STA 4 0.30 0.00 0.50 12.12 0
+2026-05-29 14:14:06 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.12 ,err=OK
+2026-05-29 14:14:07 [INFO] TX:CMD 5 0.30 0.00 0.50
+2026-05-29 14:14:07 [INFO] RX:STA 5 0.30 0.00 0.50 12.11 0
+2026-05-29 14:14:07 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.11 ,err=OK
+2026-05-29 14:14:08 [INFO] TX:CMD 6 0.30 0.00 0.50
+2026-05-29 14:14:08 [INFO] RX:STA 6 0.30 0.00 0.50 12.10 0
+2026-05-29 14:14:08 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.1 ,err=OK
+2026-05-29 14:14:09 [INFO] TX:CMD 7 0.30 0.00 0.50
+2026-05-29 14:14:09 [INFO] RX:STA 7 0.30 0.00 0.50 12.09 0
+2026-05-29 14:14:09 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.09 ,err=OK
+2026-05-29 14:14:10 [INFO] TX:CMD 8 0.30 0.00 0.50
+2026-05-29 14:14:10 [INFO] RX:STA 8 0.30 0.00 0.50 12.08 0
+2026-05-29 14:14:10 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.08 ,err=OK
+2026-05-29 14:14:11 [INFO] TX:CMD 9 0.30 0.00 0.50
+2026-05-29 14:14:11 [INFO] RX:STA 9 0.30 0.00 0.50 12.07 0
+2026-05-29 14:14:11 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.07 ,err=OK
+2026-05-29 14:14:12 [INFO] TX:CMD 10 0.30 0.00 0.50
+2026-05-29 14:14:12 [INFO] RX:STA 10 0.30 0.00 0.50 12.06 0
+2026-05-29 14:14:12 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.06 ,err=OK
+2026-05-29 14:14:58 [INFO] base client cpp started
+2026-05-29 14:14:58 [INFO] TX:CMD 0 0.30 0.00 0.50
+2026-05-29 14:14:58 [INFO] RX:STA 0 0.30 0.00 0.50 12.05 0
+2026-05-29 14:14:58 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.05 ,err=OK
+2026-05-29 14:14:59 [INFO] TX:CMD 1 0.30 0.00 0.50
+2026-05-29 14:14:59 [INFO] RX:STA 1 0.30 0.00 0.50 12.04 0
+2026-05-29 14:14:59 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.04 ,err=OK
+2026-05-29 14:15:00 [INFO] TX:CMD 2 0.30 0.00 0.50
+2026-05-29 14:15:00 [INFO] RX:STA 2 0.30 0.00 0.50 12.03 0
+2026-05-29 14:15:00 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.03 ,err=OK
+2026-05-29 14:15:01 [INFO] TX:CMD 3 0.30 0.00 0.50
+2026-05-29 14:15:01 [INFO] RX:STA 3 0.30 0.00 0.50 12.02 0
+2026-05-29 14:15:01 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.02 ,err=OK
+2026-05-29 14:15:02 [INFO] TX:CMD 4 0.30 0.00 0.50
+2026-05-29 14:15:02 [INFO] RX:STA 4 0.30 0.00 0.50 12.01 0
+2026-05-29 14:15:02 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.01 ,err=OK
+2026-05-29 14:15:03 [INFO] TX:CMD 5 0.30 0.00 0.50
+2026-05-29 14:15:03 [INFO] RX:STA 5 0.30 0.00 0.50 12.00 0
+2026-05-29 14:15:03 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12 ,err=OK
+2026-05-29 14:15:04 [INFO] TX:CMD 6 0.30 0.00 0.50
+2026-05-29 14:15:04 [INFO] RX:STA 6 0.30 0.00 0.50 11.99 0
+2026-05-29 14:15:04 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.99 ,err=OK
+2026-05-29 14:15:05 [INFO] TX:CMD 7 0.30 0.00 0.50
+2026-05-29 14:15:05 [INFO] RX:STA 7 0.30 0.00 0.50 11.98 0
+2026-05-29 14:15:05 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.98 ,err=OK
+2026-05-29 14:15:06 [INFO] TX:CMD 8 0.30 0.00 0.50
+2026-05-29 14:15:06 [INFO] RX:STA 8 0.30 0.00 0.50 11.97 0
+2026-05-29 14:15:06 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.97 ,err=OK
+2026-05-29 14:15:07 [INFO] TX:CMD 9 0.30 0.00 0.50
+2026-05-29 14:15:07 [INFO] RX:STA 9 0.30 0.00 0.50 11.96 0
+2026-05-29 14:15:07 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.96 ,err=OK
+2026-05-29 14:15:08 [INFO] TX:CMD 10 0.30 0.00 0.50
+2026-05-29 14:15:08 [INFO] RX:STA 10 0.30 0.00 0.50 11.95 0
+2026-05-29 14:15:08 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.95 ,err=OK
+2026-05-29 14:15:09 [INFO] TX:CMD 11 0.30 0.00 0.50
+2026-05-29 14:15:09 [INFO] RX:STA 11 0.30 0.00 0.50 11.94 0
+2026-05-29 14:15:09 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.94 ,err=OK
+2026-05-29 14:15:10 [INFO] TX:CMD 12 0.30 0.00 0.50
+2026-05-29 14:15:10 [INFO] RX:STA 12 0.30 0.00 0.50 11.93 0
+2026-05-29 14:15:10 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.93 ,err=OK
+2026-05-29 14:15:11 [INFO] TX:CMD 13 0.30 0.00 0.50
+2026-05-29 14:15:11 [INFO] RX:STA 13 0.30 0.00 0.50 11.92 0
+2026-05-29 14:15:11 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.92 ,err=OK
+2026-05-29 14:15:12 [INFO] TX:CMD 14 0.30 0.00 0.50
+2026-05-29 14:15:12 [INFO] RX:STA 14 0.30 0.00 0.50 11.91 0
+2026-05-29 14:15:12 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.91 ,err=OK
+2026-05-29 14:15:13 [INFO] TX:CMD 15 0.30 0.00 0.50
+2026-05-29 14:15:13 [INFO] RX:STA 15 0.30 0.00 0.50 11.90 0
+2026-05-29 14:15:13 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.9 ,err=OK
+2026-05-29 14:15:14 [INFO] TX:CMD 16 0.30 0.00 0.50
+2026-05-29 14:15:14 [INFO] RX:STA 16 0.30 0.00 0.50 11.89 0
+2026-05-29 14:15:14 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.89 ,err=OK
+2026-05-29 14:15:15 [INFO] TX:CMD 17 0.30 0.00 0.50
+2026-05-29 14:15:15 [INFO] RX:STA 17 0.30 0.00 0.50 11.88 0
+2026-05-29 14:15:15 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.88 ,err=OK
+2026-05-29 14:15:16 [INFO] TX:CMD 18 0.30 0.00 0.50
+2026-05-29 14:15:16 [INFO] RX:STA 18 0.30 0.00 0.50 11.87 0
+2026-05-29 14:15:16 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.87 ,err=OK
+2026-05-29 14:15:17 [INFO] TX:CMD 19 0.30 0.00 0.50
+2026-05-29 14:15:17 [INFO] RX:STA 19 0.30 0.00 0.50 11.86 0
+2026-05-29 14:15:17 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.86 ,err=OK
+2026-05-29 14:15:18 [INFO] TX:CMD 20 0.30 0.00 0.50
+2026-05-29 14:15:18 [INFO] RX:STA 20 0.30 0.00 0.50 11.85 0
+2026-05-29 14:15:18 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.85 ,err=OK
+2026-05-29 14:15:19 [INFO] TX:CMD 21 0.30 0.00 0.50
+2026-05-29 14:15:19 [INFO] RX:STA 21 0.30 0.00 0.50 11.84 0
+2026-05-29 14:15:19 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.84 ,err=OK
+2026-05-29 14:15:20 [INFO] TX:CMD 22 0.30 0.00 0.50
+2026-05-29 14:15:20 [INFO] RX:STA 22 0.30 0.00 0.50 11.83 0
+2026-05-29 14:15:20 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.83 ,err=OK
+2026-05-29 14:15:21 [INFO] TX:CMD 23 0.30 0.00 0.50
+2026-05-29 14:15:21 [INFO] RX:STA 23 0.30 0.00 0.50 11.82 0
+2026-05-29 14:15:21 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.82 ,err=OK
+2026-05-29 14:15:22 [INFO] TX:CMD 24 0.30 0.00 0.50
+2026-05-29 14:15:22 [INFO] RX:STA 24 0.30 0.00 0.50 11.81 0
+2026-05-29 14:15:22 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.81 ,err=OK
+2026-05-29 14:15:23 [INFO] TX:CMD 25 0.30 0.00 0.50
+2026-05-29 14:15:23 [INFO] RX:STA 25 0.30 0.00 0.50 11.80 0
+2026-05-29 14:15:23 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.8 ,err=OK
+2026-05-29 14:15:24 [INFO] TX:CMD 26 0.30 0.00 0.50
+2026-05-29 14:15:24 [INFO] RX:STA 26 0.30 0.00 0.50 11.79 0
+2026-05-29 14:15:24 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.79 ,err=OK
+2026-05-29 14:15:25 [INFO] TX:CMD 27 0.30 0.00 0.50
+2026-05-29 14:15:25 [INFO] RX:STA 27 0.30 0.00 0.50 11.78 0
+2026-05-29 14:15:25 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.78 ,err=OK
+2026-05-29 14:15:26 [INFO] TX:CMD 28 0.30 0.00 0.50
+2026-05-29 14:15:26 [INFO] RX:STA 28 0.30 0.00 0.50 11.77 0
+2026-05-29 14:15:26 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.77 ,err=OK
+2026-05-29 14:15:27 [INFO] TX:CMD 29 0.30 0.00 0.50
+2026-05-29 14:15:27 [INFO] RX:STA 29 0.30 0.00 0.50 11.76 0
+2026-05-29 14:15:27 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.76 ,err=OK
+2026-05-29 14:15:28 [INFO] TX:CMD 30 0.30 0.00 0.50
+2026-05-29 14:15:28 [INFO] RX:STA 30 0.30 0.00 0.50 11.75 0
+2026-05-29 14:15:28 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.75 ,err=OK
+2026-05-29 14:15:29 [INFO] TX:CMD 31 0.30 0.00 0.50
+2026-05-29 14:15:29 [INFO] RX:STA 31 0.30 0.00 0.50 11.74 0
+2026-05-29 14:15:29 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.74 ,err=OK
+2026-05-29 14:15:30 [INFO] TX:CMD 32 0.30 0.00 0.50
+2026-05-29 14:15:30 [INFO] RX:STA 32 0.30 0.00 0.50 11.73 0
+2026-05-29 14:15:30 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.73 ,err=OK
+2026-05-29 14:15:31 [INFO] TX:CMD 33 0.30 0.00 0.50
+2026-05-29 14:15:31 [INFO] RX:STA 33 0.30 0.00 0.50 11.72 0
+2026-05-29 14:15:31 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.72 ,err=OK
+2026-05-29 14:15:32 [INFO] TX:CMD 34 0.30 0.00 0.50
+2026-05-29 14:15:32 [INFO] RX:STA 34 0.30 0.00 0.50 11.71 0
+2026-05-29 14:15:32 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.71 ,err=OK
+2026-05-29 14:15:33 [INFO] TX:CMD 35 0.30 0.00 0.50
+2026-05-29 14:15:33 [INFO] RX:STA 35 0.30 0.00 0.50 11.70 0
+2026-05-29 14:15:33 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.7 ,err=OK
+2026-05-29 14:15:34 [WARN] communication failed,seq=36,fail_count=1,will retry
+2026-05-29 14:15:35 [WARN] communication failed,seq=37,fail_count=2,will retry
+2026-05-29 14:15:36 [WARN] communication failed,seq=38,fail_count=3,will retry
+2026-05-29 14:15:36 [ERROR] too many communication failures,enter safe mode,safe_cmd=0 0 0
+2026-05-29 14:15:37 [WARN] communication failed,seq=39,fail_count=4,will retry
+2026-05-29 14:15:38 [WARN] communication failed,seq=40,fail_count=5,will retry
+2026-05-29 14:15:39 [WARN] communication failed,seq=41,fail_count=6,will retry
+2026-05-29 14:15:40 [WARN] communication failed,seq=42,fail_count=7,will retry
+2026-05-29 14:15:41 [WARN] communication failed,seq=43,fail_count=8,will retry

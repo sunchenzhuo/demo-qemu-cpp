@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:29:50
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-29 14:10:18
+ * @最后编辑时间       : 2026-05-29 17:53:34
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -69,13 +69,13 @@ bool sendOnce(const AppConfig &cfg, Logger &logger, int seq)
     logger.info("TX:" + stripLineEnd(cmd));
 
     // 发送控制命令
-    if (!client.sendText(cmd))
+    if (!client.sendAll(cmd))
     {
         return false;
     }
     // 接收服务器返回内容
     std::string response;
-    if (!client.receiveText(response))
+    if (!client.receiveLine(response))
     {
         return false;
     }

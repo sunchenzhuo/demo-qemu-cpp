@@ -1,0 +1,34 @@
+2026-05-29 17:16:00 [INFO] base client cpp started
+2026-05-29 17:16:00 [INFO] TX:CMD 0 0.30 0.00 0.50
+2026-05-29 17:16:00 [INFO] RX:STA 0 0.30 0.00 0.50 12.28 0
+2026-05-29 17:16:00 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.28 ,err=OK
+2026-05-29 17:16:01 [INFO] TX:CMD 1 0.30 0.00 0.50
+2026-05-29 17:16:01 [INFO] RX:STA 1 0.30 0.00 0.50 12.27 0
+2026-05-29 17:16:01 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.27 ,err=OK
+2026-05-29 17:16:02 [INFO] TX:CMD 2 0.30 0.00 0.50
+2026-05-29 17:16:02 [INFO] RX:STA 2 0.30 0.00 0.50 12.26 0
+2026-05-29 17:16:02 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.26 ,err=OK
+2026-05-29 17:16:03 [INFO] TX:CMD 3 0.30 0.00 0.50
+2026-05-29 17:16:03 [INFO] RX:STA 3 0.30 0.00 0.50 12.25 0
+2026-05-29 17:16:03 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.25 ,err=OK
+2026-05-29 17:16:04 [INFO] TX:CMD 4 0.30 0.00 0.50
+2026-05-29 17:16:04 [INFO] RX:STA 4 0.30 0.00 0.50 12.24 0
+2026-05-29 17:16:04 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.24 ,err=OK
+2026-05-29 17:16:05 [INFO] TX:CMD 5 0.30 0.00 0.50
+2026-05-29 17:16:05 [INFO] RX:STA 5 0.30 0.00 0.50 12.23 0
+2026-05-29 17:16:05 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.23 ,err=OK
+2026-05-29 17:16:06 [INFO] TX:CMD 6 0.30 0.00 0.50
+2026-05-29 17:16:06 [INFO] RX:STA 6 0.30 0.00 0.50 12.22 0
+2026-05-29 17:16:06 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.22 ,err=OK
+2026-05-29 17:16:07 [INFO] TX:CMD 7 0.30 0.00 0.50
+2026-05-29 17:16:07 [INFO] RX:STA 7 0.30 0.00 0.50 12.21 0
+2026-05-29 17:16:07 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.21 ,err=OK
+2026-05-29 17:16:08 [INFO] TX:CMD 8 0.30 0.00 0.50
+2026-05-29 17:16:08 [INFO] RX:STA 8 0.30 0.00 0.50 12.20 0
+2026-05-29 17:16:08 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.2 ,err=OK
+2026-05-29 17:16:09 [INFO] TX:CMD 9 0.30 0.00 0.50
+2026-05-29 17:16:09 [INFO] RX:STA 9 0.30 0.00 0.50 12.19 0
+2026-05-29 17:16:09 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.19 ,err=OK
+2026-05-29 17:16:10 [INFO] TX:CMD 10 0.30 0.00 0.50
+2026-05-29 17:16:10 [INFO] RX:STA 10 0.30 0.00 0.50 12.18 0
+2026-05-29 17:16:10 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.18 ,err=OK

@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:29:50
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-29 17:53:34
+ * @最后编辑时间       : 2026-06-01 15:33:56
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -65,6 +65,14 @@ bool sendOnce(const AppConfig &cfg, Logger &logger, int seq)
     {
         return false;
     }
+
+    client.setReceiveTimeout(cfg.recv_timeout_ms); // 设置接收超时时间为cfg.recv_timeout_ms ，防止 recv() 长时间阻塞
+
+    if (!client.setReceiveTimeout(cfg.recv_timeout_ms))
+    {
+        return false;
+    }
+
     // 记录发送日志，TX 表示 transmit，即发送数据
     logger.info("TX:" + stripLineEnd(cmd));
 

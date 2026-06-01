@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:31:14
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-29 17:52:02
+ * @最后编辑时间       : 2026-06-01 14:59:51
  * @Version      : V1.0.0
  * @功能描述         :这个 TcpClient 类是对 Linux TCP socket 的一个简单封装。内部通过 sock_ 保存 socket 文件描述符，初始化为 -1 表示未连接。connectTo() 负责创建 socket、配置服务器地址并发起连接；sendText() 负责通过 send() 发送字符串数据；receiveText() 通过 recv() 接收服务器返回内容；closeSocket() 负责关闭连接并重置状态。析构函数中调用 closeSocket()，是为了保证对象销毁时自动释放 socket 资源，避免文件描述符泄漏。同时禁用拷贝构造和赋值操作，是为了防止多个对象持有同一个 socket 文件描述符，导致重复关闭或资源状态混乱。
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -16,6 +16,9 @@
 #include <iostream>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <sys/time.h>
+#include <cerrno>
+#include <cstring>
 
 // 析构函数：当 TcpClient 对象销毁时会自动调用
 TcpClient::~TcpClient()
@@ -72,6 +75,35 @@ bool TcpClient::connectTo(const std::string &ip, int port)
     return true;
 }
 
+/**
+ * @brief 设置 TCP 接收超时时间。
+ *
+ * 该函数用于设置当前 socket 的接收超时时间，避免 recv() 在服务端无响应
+ * 或网络异常时长时间阻塞。设置成功后，如果在指定时间内没有接收到数据，
+ * recv() 会返回失败，调用方可以据此执行重试、告警或安全模式逻辑。
+ *
+ * @param timeout_ms 接收超时时间，单位为毫秒。
+ * @return true 超时时间设置成功。
+ * @return false socket 未连接或设置失败。
+ */
+bool TcpClient::setReceiveTimeout(int timeout_ms)
+{
+    if (sock_ < 0)
+    {
+        std::cerr << "socket not connected" << std::endl;
+        return false;
+    }
+    timeval tv{};
+    tv.tv_sec = timeout_ms / 1000;
+    tv.tv_usec = (timeout_ms % 1000) * 1000;
+    // 这个函数用于设置 socket 选项,要设置哪个 socket,设置的是 socket 通用层面的选项,选项名称是 SO_RCVTIMEO表示设置接收超时时间,选项值是 tv 结构体,长度是 sizeof(tv)
+    if (setsockopt(sock_, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0)
+    {
+        std::cerr << "set receive timeout failed" << std::endl;
+        return false;
+    }
+    return true;
+}
 /**
  * @brief 发送完整字符串数据。
  *
@@ -162,7 +194,15 @@ bool TcpClient::receiveLine(std::string &line)
         // n < 0 表示接收失败
         if (n < 0)
         {
-            std::cerr << "recv failed" << std::endl;
+            // 判断这次 recv() 失败，是不是因为“暂时没有数据可读 / 接收超时”，而不是严重错误
+            if (errno == EAGAIN || errno == EWOULDBLOCK)
+            {
+                std::cerr << "recv timeout" << std::endl;
+            }
+            else
+            {
+                std::cerr << "recv failed:" << std::strerror(errno) << std::endl;
+            }
             return false;
         }
 

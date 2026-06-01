@@ -153,3 +153,59 @@
 2026-06-01 15:35:50 [INFO] TX:CMD 8 0.30 0.00 0.50
 2026-06-01 15:35:50 [INFO] RX:STA 8 0.30 0.00 0.50 12.21 0
 2026-06-01 15:35:50 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.21 ,err=OK
+2026-06-01 17:42:35 [INFO] monitor connected=0 ,last_seq=-1 ,battery_voltage=0 ,err=UNKONW ,fail_count=0 ,safe_mode=0
+2026-06-01 17:42:35 [INFO] TX:CMD 0 0.30 0.00 0.50
+2026-06-01 17:42:35 [INFO] RX:STA 0 0.30 0.00 0.50 12.20 0
+2026-06-01 17:42:35 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.2 ,err=OK
+2026-06-01 17:42:36 [INFO] monitor connected=1 ,last_seq=0 ,battery_voltage=12.2 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:42:36 [INFO] TX:CMD 1 0.30 0.00 0.50
+2026-06-01 17:42:36 [INFO] RX:STA 1 0.30 0.00 0.50 12.19 0
+2026-06-01 17:42:36 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.19 ,err=OK
+2026-06-01 17:42:37 [INFO] monitor connected=1 ,last_seq=1 ,battery_voltage=12.19 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:42:37 [INFO] TX:CMD 2 0.30 0.00 0.50
+2026-06-01 17:42:37 [INFO] RX:STA 2 0.30 0.00 0.50 12.18 0
+2026-06-01 17:42:37 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.18 ,err=OK
+2026-06-01 17:42:38 [INFO] monitor connected=1 ,last_seq=2 ,battery_voltage=12.18 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:42:38 [INFO] TX:CMD 3 0.30 0.00 0.50
+2026-06-01 17:42:38 [INFO] RX:STA 3 0.30 0.00 0.50 12.17 0
+2026-06-01 17:42:38 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.17 ,err=OK
+2026-06-01 17:42:39 [INFO] monitor connected=1 ,last_seq=3 ,battery_voltage=12.17 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:42:39 [INFO] TX:CMD 4 0.30 0.00 0.50
+2026-06-01 17:42:39 [INFO] RX:STA 4 0.30 0.00 0.50 12.16 0
+2026-06-01 17:42:39 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.16 ,err=OK
+2026-06-01 17:42:40 [INFO] monitor connected=1 ,last_seq=4 ,battery_voltage=12.16 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:42:40 [INFO] TX:CMD 5 0.30 0.00 0.50
+2026-06-01 17:42:40 [INFO] RX:STA 5 0.30 0.00 0.50 12.15 0
+2026-06-01 17:42:40 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.15 ,err=OK
+2026-06-01 17:52:18 [INFO] monitor connected=0 ,last_seq=-1 ,battery_voltage=0 ,err=UNKNOWN ,fail_count=0 ,safe_mode=0
+2026-06-01 17:52:18 [INFO] TX:CMD 0 0.30 0.00 0.50
+2026-06-01 17:52:18 [INFO] RX:STA 0 0.30 0.00 0.50 12.14 0
+2026-06-01 17:52:18 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.14 ,err=OK
+2026-06-01 17:52:19 [INFO] monitor connected=1 ,last_seq=0 ,battery_voltage=12.14 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:52:19 [INFO] TX:CMD 1 0.30 0.00 0.50
+2026-06-01 17:52:19 [INFO] RX:STA 1 0.30 0.00 0.50 12.13 0
+2026-06-01 17:52:19 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.13 ,err=OK
+2026-06-01 17:52:20 [INFO] monitor connected=1 ,last_seq=1 ,battery_voltage=12.13 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:52:20 [INFO] TX:CMD 2 0.30 0.00 0.50
+2026-06-01 17:52:20 [INFO] RX:STA 2 0.30 0.00 0.50 12.12 0
+2026-06-01 17:52:20 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.12 ,err=OK
+2026-06-01 17:52:21 [INFO] monitor connected=1 ,last_seq=2 ,battery_voltage=12.12 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:52:21 [INFO] TX:CMD 3 0.30 0.00 0.50
+2026-06-01 17:52:21 [INFO] RX:STA 3 0.30 0.00 0.50 12.11 0
+2026-06-01 17:52:21 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.11 ,err=OK
+2026-06-01 17:52:22 [INFO] monitor connected=1 ,last_seq=3 ,battery_voltage=12.11 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:52:22 [INFO] TX:CMD 4 0.30 0.00 0.50
+2026-06-01 17:52:22 [INFO] RX:STA 4 0.30 0.00 0.50 12.10 0
+2026-06-01 17:52:22 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.1 ,err=OK
+2026-06-01 17:52:23 [INFO] monitor connected=1 ,last_seq=4 ,battery_voltage=12.1 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:52:23 [INFO] TX:CMD 5 0.30 0.00 0.50
+2026-06-01 17:52:23 [INFO] RX:STA 5 0.30 0.00 0.50 12.09 0
+2026-06-01 17:52:23 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.09 ,err=OK
+2026-06-01 17:52:24 [INFO] monitor connected=1 ,last_seq=5 ,battery_voltage=12.09 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:52:24 [INFO] TX:CMD 6 0.30 0.00 0.50
+2026-06-01 17:52:24 [INFO] RX:STA 6 0.30 0.00 0.50 12.08 0
+2026-06-01 17:52:24 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.08 ,err=OK
+2026-06-01 17:52:25 [INFO] monitor connected=1 ,last_seq=6 ,battery_voltage=12.08 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-01 17:52:25 [INFO] TX:CMD 7 0.30 0.00 0.50
+2026-06-01 17:52:25 [INFO] RX:STA 7 0.30 0.00 0.50 12.07 0
+2026-06-01 17:52:25 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=12.07 ,err=OK

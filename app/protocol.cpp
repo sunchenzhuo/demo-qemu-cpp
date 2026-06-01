@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:30:51
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-29 14:01:09
+ * @最后编辑时间       : 2026-06-01 17:31:42
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -35,7 +35,7 @@ bool parseStatus(const std::string &text, Status &status)
     std::istringstream iss(text); // 创建字符串输入流
 
     std::string tag;                                                                                         // 保存状态消息开头的标识
-    iss >> tag >> status.seq >> status.vx >> status.vy >> status.wz >> status.bettery_voltage >> status.err; // 解析整行数据
+    iss >> tag >> status.seq >> status.vx >> status.vy >> status.wz >> status.battery_voltage >> status.err; // 解析整行数据
 
     if (!iss || tag != "STA") //! iss输入流状态异常，也就是解析失败了
     {

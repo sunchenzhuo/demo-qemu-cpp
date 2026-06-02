@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:31:24
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-29 10:47:13
+ * @最后编辑时间       : 2026-06-02 14:08:39
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -12,7 +12,7 @@
 
 #include <fstream>
 #include <string>
-
+#include <mutex>
 /**
  * @brief 简单日志工具类。
  *
@@ -29,6 +29,7 @@ class Logger
 {
 private:
     std::ofstream file_;
+    std::mutex mutex_; // 保护 file_ 的互斥锁，确保多线程写日志时不会出现数据竞争
 
 private:
     /**

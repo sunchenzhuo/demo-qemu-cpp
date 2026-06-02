@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:29:50
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-06-02 13:38:17
+ * @最后编辑时间       : 2026-06-02 14:12:05
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -57,7 +57,7 @@ void handleSignal(int signal)
 
 std::string stripLineEnd(std::string text)
 {
-    if (!text.empty() && (text.back() == '\n' || text.back() == '\r'))
+    while (!text.empty() && (text.back() == '\n' || text.back() == '\r'))
     {
         text.pop_back();
     }
@@ -101,8 +101,7 @@ bool sendOnce(const AppConfig &cfg, const MotionCommand &cmd, Logger &logger, in
         return false;
     }
 
-    client.setReceiveTimeout(cfg.recv_timeout_ms); // 设置接收超时时间为cfg.recv_timeout_ms ，防止 recv() 长时间阻塞
-
+    // 设置 TCP 接收超时时间，避免 recv() 长时间阻塞
     if (!client.setReceiveTimeout(cfg.recv_timeout_ms))
     {
         return false;
@@ -293,9 +292,13 @@ void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, Threa
         }
 
         MotionCommand latest_cmd;
-        if (!command_queue.tryPopLatest(latest_cmd))
+        if (command_queue.tryPopLatest(latest_cmd))
         {
             cmd = latest_cmd;
+            logger.info("use latest command form queue");
+        }
+        else
+        {
             logger.info("use command form queue");
         }
 
@@ -430,6 +433,10 @@ int main(int argc, char const *argv[])
 
     // 根据配置文件中的日志路径创建日志对象
     Logger logger(cfg.log_file);
+    // 记录程序启动日志
+    logger.info("base client cpp started");
+    // 打印当前配置，方便启动时确认配置是否正确
+    printConfig(cfg);
     // 创建共享状态对象。
     // communicationThread 会负责更新该状态，statusThread 会负责读取该状态并输出监控日志。
     SharedState state;
@@ -465,9 +472,7 @@ int main(int argc, char const *argv[])
     ctrl_thread.join();
     comm_thread.join();
     monitor_thread.join();
-    // 记录程序启动日志
-    logger.info("base client cpp started");
-    // 打印当前配置，方便启动时确认配置是否正确
-    printConfig(cfg);
+
+    logger.info("base client cpp stopped");
     return 0;
 }

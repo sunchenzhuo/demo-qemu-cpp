@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:31:30
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-05-29 10:45:16
+ * @最后编辑时间       : 2026-06-02 14:10:36
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -15,6 +15,7 @@
 #include <iomanip>  // 用于 std::put_time 格式化时间
 #include <iostream> // 用于 std::cout、std::cerr 输出到终端
 #include <sstream>  // 用于 std::ostringstream 拼接字符串
+#include <mutex>    // 用于 std::mutex 保护日志文件写入的线程安全
 
 /**
  * @brief 创建日志对象并打开日志文件。
@@ -130,6 +131,7 @@ std::string Logger::nowString() const
  */
 void Logger::write(const std::string &level, const std::string &msg)
 {
+    std::lock_guard<std::mutex> lock(mutex_); // 加锁保护日志写入，确保多线程环境下日志不会混乱
     // 拼接一整行日志
     // 例如：26-05-29 10:20:30[INFO]server started
     const std::string line = nowString() + " [" + level + "] " + msg;

@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:30:51
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-06-02 11:16:53
+ * @最后编辑时间       : 2026-06-02 14:10:52
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -58,6 +58,6 @@ std::string errToText(int err)
     case 3:
         return "SPEED_LIMIT"; // 发送的速度超过安全范围，服务端拒绝执行
     default:
-        return "UNKNOW";
+        return "UNKNOWN";
     }
 }

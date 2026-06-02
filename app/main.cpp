@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:29:50
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-06-02 09:27:18
+ * @最后编辑时间       : 2026-06-02 13:38:17
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -13,6 +13,7 @@
 #include "protocol.hpp"
 #include "tcp_client.hpp"
 #include "logger.hpp"
+#include "thread_safe_queue.hpp"
 
 #include <string>
 #include <iostream>
@@ -84,10 +85,10 @@ std::string stripLineEnd(std::string text)
  * @param seq 当前命令序号，用于请求和响应匹配校验。
  * @return true 本次通信成功；false 本次通信失败。
  */
-bool sendOnce(const AppConfig &cfg, Logger &logger, int seq, Status &status)
+bool sendOnce(const AppConfig &cfg, const MotionCommand &cmd, Logger &logger, int seq, Status &status)
 {
     // 根据配置和当前序号构造一条控制命令
-    const std::string cmd = buildCommand(cfg, seq);
+    const std::string cmd_text = buildCommand(cmd, seq);
 
     // 创建 TCP 客户端对象
     // 该对象生命周期只在本次 sendOnce 内有效
@@ -108,10 +109,10 @@ bool sendOnce(const AppConfig &cfg, Logger &logger, int seq, Status &status)
     }
 
     // 记录发送日志，TX 表示 transmit，即发送数据
-    logger.info("TX:" + stripLineEnd(cmd));
+    logger.info("TX:" + stripLineEnd(cmd_text));
 
     // 发送控制命令
-    if (!client.sendAll(cmd))
+    if (!client.sendAll(cmd_text))
     {
         return false;
     }
@@ -209,6 +210,29 @@ void statusThread(std::atomic<bool> &running, SharedState &state, std::mutex &st
     }
 }
 
+void controlThread(const AppConfig &cfg, std::atomic<bool> &running, ThreadSafeQueue<MotionCommand> &command_queue, Logger &logger)
+{
+    int count = 0;
+    while (running)
+    {
+        MotionCommand cmd;
+        cmd.vx = cfg.vx;
+        cmd.vy = cfg.vy;
+        cmd.wz = cfg.wz;
+
+        command_queue.push(cmd);
+
+        std::ostringstream oss;
+        oss << "control push command count=" << count
+            << " ,vx=" << cmd.vx
+            << " ,vy=" << cmd.vy
+            << " ,wz=" << cmd.wz;
+        logger.info(oss.str());
+
+        count++;
+        std::this_thread::sleep_for(std::chrono::milliseconds(cfg.period_ms));
+    }
+}
 /**
  * @brief 通信线程函数，负责周期性与服务端进行 TCP 通信并更新共享状态。
  *
@@ -232,7 +256,7 @@ void statusThread(std::atomic<bool> &running, SharedState &state, std::mutex &st
  * @param state_mutex 保护共享状态对象的互斥锁。
  * @param logger 日志对象，用于记录通信状态、异常信息和安全模式切换日志。
  */
-void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, SharedState &state, std::mutex &state_mutex, Logger &logger)
+void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, ThreadSafeQueue<MotionCommand> &command_queue, SharedState &state, std::mutex &state_mutex, Logger &logger)
 {
     // 当前发送命令序号，每发送一轮加 1
     int seq = 0;
@@ -247,6 +271,7 @@ void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, Share
     // 主循环：只要 running 为 true，通信线程就持续运行。
     while (running)
     {
+
         // 模拟崩溃逻辑。
         // 如果配置了 crash_after，并且当前 seq 达到阈值，
         // 则主动停止线程，用于测试 systemd、守护进程或自动重启机制。
@@ -258,12 +283,28 @@ void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, Share
             break;
         }
 
+        MotionCommand cmd;
+        if (!command_queue.waitPop(cmd, std::chrono::milliseconds(cfg.period_ms)))
+        {
+            logger.warn("no command received, use safe command");
+            cmd.vx = cfg.safe_vx;
+            cmd.vy = cfg.safe_vy;
+            cmd.wz = cfg.safe_wz;
+        }
+
+        MotionCommand latest_cmd;
+        if (!command_queue.tryPopLatest(latest_cmd))
+        {
+            cmd = latest_cmd;
+            logger.info("use command form queue");
+        }
+
         // 保存本次通信解析出的服务端状态。
         Status status;
         // 执行一次完整通信：
         // 构造命令 -> 连接服务端 -> 发送命令 -> 接收响应 -> 解析状态。
         // 如果通信成功，status 会被填充为服务端返回的底盘状态。
-        const bool ok = sendOnce(cfg, logger, seq, status);
+        const bool ok = sendOnce(cfg, cmd, logger, seq, status);
 
         // 本次通信失败
         if (!ok)
@@ -392,19 +433,22 @@ int main(int argc, char const *argv[])
     // 创建共享状态对象。
     // communicationThread 会负责更新该状态，statusThread 会负责读取该状态并输出监控日志。
     SharedState state;
-    std::mutex state_mutex; // 保护共享状态的互斥锁
+    ThreadSafeQueue<MotionCommand> command_queue; // 线程安全的命令队列，用于在控制线程和通信线程之间传递最新的运动命令
+    std::mutex state_mutex;                       // 保护共享状态的互斥锁
 
+    std::thread ctrl_thread(controlThread, std::cref(cfg), std::ref(g_running), std::ref(command_queue), std::ref(logger));
     // 启动通信线程。
     // communicationThread 负责周期性连接服务端、发送控制命令、接收状态响应，
     // 并根据通信结果更新共享状态 state。
     //
     // 参数说明：
-    // std::cref(cfg)         ：以 const 引用方式传入配置对象，避免复制且线程内不可修改 cfg。
+    // std::cref(cfg)        ：以 const 引用方式传入配置对象，避免复制且线程内不可修改 cfg。
     // std::ref(g_running)   ：以引用方式传入运行标志，用于控制线程退出。
+    // std::ref(command_queue):以“引用”的方式传给线程或函数包装器，而不是拷贝一份
     // std::ref(state)       ：以引用方式传入共享状态对象，通信线程会更新它。
     // std::ref(state_mutex) ：以引用方式传入互斥锁，用于保护共享状态。
     // std::ref(logger)      ：以引用方式传入日志对象，用于记录通信日志。
-    std::thread comm_thread(communicationThread, std::cref(cfg), std::ref(g_running), std::ref(state), std::ref(state_mutex), std::ref(logger));
+    std::thread comm_thread(communicationThread, std::cref(cfg), std::ref(g_running), std::ref(command_queue), std::ref(state), std::ref(state_mutex), std::ref(logger));
 
     // 启动状态监控线程。
     // statusThread 负责每隔一段时间读取共享状态 state，
@@ -418,6 +462,7 @@ int main(int argc, char const *argv[])
     std::thread monitor_thread(statusThread, std::ref(g_running), std::ref(state), std::ref(state_mutex), std::ref(logger));
 
     logger.info("threads started");
+    ctrl_thread.join();
     comm_thread.join();
     monitor_thread.join();
     // 记录程序启动日志

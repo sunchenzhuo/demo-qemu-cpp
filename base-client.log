@@ -262,3 +262,64 @@
 2026-06-02 09:28:00 [INFO] RX:STA 11 0.30 0.00 0.50 11.95 0
 2026-06-02 09:28:00 [INFO] status vx=0.3 ,vy=0 ,wz=0.5 ,battery_voltage=11.95 ,err=OK
 2026-06-02 09:28:01 [INFO] base client cpp started
+2026-06-02 13:43:46 [INFO] threads started
+2026-06-02 13:43:46 [INFO] threads started
+2026-06-02 13:43:46 [INFO] use command form queue
+2026-06-02 13:43:46 [INFO] threads started
+2026-06-02 13:43:46 [INFO] use command form queue
+2026-06-02 13:43:46 [INFO] monitor connected=0 ,last_seq=-1 ,battery_voltage=0 ,err=UNKNOWN ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:46 [INFO] threads started
+2026-06-02 13:43:46 [INFO] use command form queue
+2026-06-02 13:43:46 [INFO] monitor connected=0 ,last_seq=-1 ,battery_voltage=0 ,err=UNKNOWN ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:46 [INFO] control push command count=0 ,vx=0.3 ,vy=0 ,wz=0.5
+2026-06-02 13:43:46 [INFO] TX:CMD 0 0.00 0.00 0.00
+2026-06-02 13:43:46 [INFO] RX:STA 0 0.00 0.00 0.00 11.94 0
+2026-06-02 13:43:46 [INFO] status vx=0 ,vy=0 ,wz=0 ,battery_voltage=11.94 ,err=OK
+2026-06-02 13:43:47 [INFO] monitor connected=1 ,last_seq=0 ,battery_voltage=11.94 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:47 [INFO] monitor connected=1 ,last_seq=0 ,battery_voltage=11.94 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:47 [INFO] control push command count=1 ,vx=0.3 ,vy=0 ,wz=0.5
+2026-06-02 13:43:47 [INFO] use command form queue
+2026-06-02 13:43:47 [INFO] TX:CMD 1 0.00 0.00 0.00
+2026-06-02 13:43:47 [INFO] RX:STA 1 0.00 0.00 0.00 11.93 0
+2026-06-02 13:43:47 [INFO] status vx=0 ,vy=0 ,wz=0 ,battery_voltage=11.93 ,err=OK
+2026-06-02 13:43:48 [INFO] control push command count=2 ,vx=0.3 ,vy=0 ,wz=0.5
+2026-06-02 13:43:48 [INFO] control push command count=2 ,vx=0.3 ,vy=0 ,wz=0.5
+2026-06-02 13:43:48 [INFO] monitor connected=1 ,last_seq=1 ,battery_voltage=11.93 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:48 [INFO] use command form queue
+2026-06-02 13:43:48 [INFO] TX:CMD 2 0.00 0.00 0.00
+2026-06-02 13:43:48 [INFO] RX:STA 2 0.00 0.00 0.00 11.92 0
+2026-06-02 13:43:48 [INFO] status vx=0 ,vy=0 ,wz=0 ,battery_voltage=11.92 ,err=OK
+2026-06-02 13:43:49 [INFO] monitor connected=1 ,last_seq=2 ,battery_voltage=11.92 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:49 [INFO] monitor connected=1 ,last_seq=2 ,battery_voltage=11.92 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:49 [INFO] control push command count=3 ,vx=0.3 ,vy=0 ,wz=0.5
+2026-06-02 13:43:49 [INFO] use command form queue
+2026-06-02 13:43:49 [INFO] TX:CMD 3 0.00 0.00 0.00
+2026-06-02 13:43:49 [INFO] RX:STA 3 0.00 0.00 0.00 11.91 0
+2026-06-02 13:43:49 [INFO] status vx=0 ,vy=0 ,wz=0 ,battery_voltage=11.91 ,err=OK
+2026-06-02 13:43:50 [INFO] monitor connected=1 ,last_seq=3 ,battery_voltage=11.91 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:50 [INFO] control push command count=4 ,vx=0.3 ,vy=0 ,wz=0.5
+2026-06-02 13:43:50 [INFO] use command form queue
+2026-06-02 13:43:50 [INFO] TX:CMD 4 0.00 0.00 0.00
+2026-06-02 13:43:50 [INFO] RX:STA 4 0.00 0.00 0.00 11.90 0
+2026-06-02 13:43:50 [INFO] status vx=0 ,vy=0 ,wz=0 ,battery_voltage=11.9 ,err=OK
+2026-06-02 13:43:51 [INFO] monitor connected=1 ,last_seq=4 ,battery_voltage=11.9 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:51 [INFO] monitor connected=1 ,last_seq=4 ,battery_voltage=11.9 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:51 [INFO] control push command count=5 ,vx=0.3 ,vy=0 ,wz=0.5
+2026-06-02 13:43:51 [INFO] use command form queue
+2026-06-02 13:43:51 [INFO] TX:CMD 5 0.00 0.00 0.00
+2026-06-02 13:43:51 [INFO] RX:STA 5 0.00 0.00 0.00 11.89 0
+2026-06-02 13:43:51 [INFO] status vx=0 ,vy=0 ,wz=0 ,battery_voltage=11.89 ,err=OK
+2026-06-02 13:43:52 [INFO] monitor connected=1 ,last_seq=5 ,battery_voltage=11.89 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:52 [INFO] monitor connected=1 ,last_seq=5 ,battery_voltage=11.89 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:52 [INFO] control push command count=6 ,vx=0.3 ,vy=0 ,wz=0.5
+2026-06-02 13:43:52 [INFO] use command form queue
+2026-06-02 13:43:52 [INFO] TX:CMD 6 0.00 0.00 0.00
+2026-06-02 13:43:52 [INFO] RX:STA 6 0.00 0.00 0.00 11.88 0
+2026-06-02 13:43:52 [INFO] status vx=0 ,vy=0 ,wz=0 ,battery_voltage=11.88 ,err=OK
+2026-06-02 13:43:53 [INFO] monitor connected=1 ,last_seq=6 ,battery_voltage=11.88 ,err=OK ,fail_count=0 ,safe_mode=0
+2026-06-02 13:43:53 [INFO] control push command count=7 ,vx=0.3 ,vy=0 ,wz=0.5
+2026-06-02 13:43:53 [INFO] use command form queue
+2026-06-02 13:43:53 [INFO] TX:CMD 7 0.00 0.00 0.00
+2026-06-02 13:43:53 [INFO] RX:STA 7 0.00 0.00 0.00 11.87 0
+2026-06-02 13:43:53 [INFO] status vx=0 ,vy=0 ,wz=0 ,battery_voltage=11.87 ,err=OK
+2026-06-02 13:43:54 [INFO] base client cpp started

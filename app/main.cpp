@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:29:50
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-06-01 17:51:59
+ * @最后编辑时间       : 2026-06-02 09:03:48
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -23,6 +23,15 @@
 #include <mutex>
 #include <functional>
 
+/**
+ * @brief 客户端共享运行状态。
+ *
+ * 该结构体用于保存 TCP 客户端当前运行状态，包括最近一次成功通信序号、
+ * 底盘速度、电池电压、错误信息、连续通信失败次数、连接状态和安全模式状态。
+ *
+ * SharedState 通常会被通信线程写入，被状态监控线程读取。
+ * 因此在多线程环境下访问该结构体时，需要配合互斥锁使用，避免数据竞争。
+ */
 struct SharedState
 {
     int last_seq = -1; // 上一次成功通信的序号，初始值为 -1 表示还没有成功通信过
@@ -192,11 +201,34 @@ void statusThread(std::atomic<bool> &running, SharedState &state, std::mutex &st
     }
 }
 
+/**
+ * @brief 通信线程函数，负责周期性与服务端进行 TCP 通信并更新共享状态。
+ *
+ * 该函数通常运行在独立线程中，按照配置文件中的通信周期 period_ms
+ * 持续执行以下流程：
+ *
+ * 1. 根据当前 seq 构造并发送控制命令；
+ * 2. 接收并解析服务端返回的底盘状态；
+ * 3. 根据通信结果更新连续失败次数；
+ * 4. 当连续失败次数达到阈值时进入安全模式；
+ * 5. 通信恢复后退出安全模式；
+ * 6. 将最新通信状态写入 SharedState，供监控线程读取。
+ *
+ * 多线程注意事项：
+ * SharedState 是多个线程共享的数据，因此写入 state 时必须使用 state_mutex 加锁，
+ * 避免通信线程写数据的同时，监控线程读取数据导致数据竞争。
+ *
+ * @param cfg 系统配置对象，包含服务器地址、端口、通信周期、最大失败次数等参数。
+ * @param running 线程运行标志，为 true 时持续运行，为 false 时退出线程。
+ * @param state 共享状态对象，用于保存当前连接状态、速度、电池电压、错误信息等。
+ * @param state_mutex 保护共享状态对象的互斥锁。
+ * @param logger 日志对象，用于记录通信状态、异常信息和安全模式切换日志。
+ */
 void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, SharedState &state, std::mutex &state_mutex, Logger &logger)
 {
     // 当前发送命令序号，每发送一轮加 1
     int seq = 0;
-    // 连续通信失败次数
+    // 连续通信失败次数，通信失败时递增，通信成功后清零。
     int fail_count = 0;
     // 标记之前是否发生过通信中断
     // 用于通信恢复后打印恢复日志
@@ -204,21 +236,25 @@ void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, Share
     // 标记当前是否处于安全模式
     bool safe_mode = false;
 
-    // 主循环：按照配置周期持续执行通信任务
+    // 主循环：只要 running 为 true，通信线程就持续运行。
     while (running)
     {
-        // 模拟崩溃逻辑
-        // 如果配置了 crash_after，并且当前序号达到阈值，则主动退出程序
-        // 主要用于测试 systemd、守护进程或重启机制
+        // 模拟崩溃逻辑。
+        // 如果配置了 crash_after，并且当前 seq 达到阈值，
+        // 则主动停止线程，用于测试 systemd、守护进程或自动重启机制。
         if (cfg.crash_after >= 0 && seq >= cfg.crash_after)
         {
             logger.error("simulate crash after seq=....");
+            // 将运行标志置为 false，通知线程退出。
             running = false;
             break;
         }
 
+        // 保存本次通信解析出的服务端状态。
         Status status;
-        // 执行一次完整通信
+        // 执行一次完整通信：
+        // 构造命令 -> 连接服务端 -> 发送命令 -> 接收响应 -> 解析状态。
+        // 如果通信成功，status 会被填充为服务端返回的底盘状态。
         const bool ok = sendOnce(cfg, logger, seq, status);
 
         // 本次通信失败
@@ -236,18 +272,23 @@ void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, Share
                 safe_mode = true;
                 logger.error("enter safe mode");
             }
+            // 更新共享状态。
+            // 这里必须加锁，因为监控线程可能同时读取 state。
             {
-
                 std::lock_guard<std::mutex> lock(state_mutex);
+                // 更新连续失败次数。
                 state.fail_count = fail_count;
+                // 标记当前通信未连接。
                 state.connected = false;
+                // 更新安全模式状态。
                 state.safe_mode = safe_mode;
             }
         }
         // 本次通信成功
         else
         {
-            // 如果之前发生过通信中断，则说明当前通信已经恢复
+            // 如果之前发生过通信中断，而本次通信成功，
+            // 说明通信已经恢复。
             if (was_disconnected)
             {
                 logger.info("communication recovered");
@@ -264,22 +305,34 @@ void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, Share
             was_disconnected = false;
             safe_mode = false;
 
+            // 更新共享状态。
+            // 将本次解析到的服务端状态写入 SharedState，
+            // 供状态监控线程 statusThread 定期读取并输出日志。
             {
                 std::lock_guard<std::mutex> lock(state_mutex);
+                // 更新最后一次成功通信的序号。
                 state.last_seq = status.seq;
+
+                // 更新底盘速度状态。
                 state.vx = status.vx;
                 state.vy = status.vy;
                 state.wz = status.wz;
+
+                // 更新电池电压。
                 state.battery_voltage = status.battery_voltage;
+                // 将错误码转换成可读文本后保存。
                 state.err_text = errToText(status.err);
+                // 通信成功，连续失败次数清零。
                 state.fail_count = 0;
+                // 标记当前连接正常。
                 state.connected = true;
+                // 通信恢复后退出安全模式。
                 state.safe_mode = false;
             }
         }
         // 命令序号递增，下一轮发送新的 seq
         seq++;
-        // 按配置周期休眠，避免无限高速循环
+        // 按配置的通信周期休眠，避免 while 循环高速空转占满 CPU。
         std::this_thread::sleep_for(std::chrono::milliseconds(cfg.period_ms));
     }
 }

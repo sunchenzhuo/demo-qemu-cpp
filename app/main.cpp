@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:29:50
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-06-02 14:12:05
+ * @最后编辑时间       : 2026-06-02 14:24:09
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -290,16 +290,18 @@ void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, Threa
             cmd.vy = cfg.safe_vy;
             cmd.wz = cfg.safe_wz;
         }
-
-        MotionCommand latest_cmd;
-        if (command_queue.tryPopLatest(latest_cmd))
-        {
-            cmd = latest_cmd;
-            logger.info("use latest command form queue");
-        }
         else
         {
-            logger.info("use command form queue");
+            MotionCommand latest_cmd;
+            if (command_queue.tryPopLatest(latest_cmd))
+            {
+                cmd = latest_cmd;
+                logger.info("use latest command form queue");
+            }
+            else
+            {
+                logger.info("use command form queue");
+            }
         }
 
         // 保存本次通信解析出的服务端状态。

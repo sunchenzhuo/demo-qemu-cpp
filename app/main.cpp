@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:29:50
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-06-02 09:03:48
+ * @最后编辑时间       : 2026-06-02 09:27:18
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -22,6 +22,7 @@
 #include <atomic> //这是一个线程安全的布尔变量，用来控制线程是否继续运行
 #include <mutex>
 #include <functional>
+#include <csignal>
 
 /**
  * @brief 客户端共享运行状态。
@@ -45,6 +46,13 @@ struct SharedState
     bool connected = false;
     bool safe_mode = false;
 };
+
+std::atomic<bool> g_running{true}; // 全局运行标志，控制所有线程的运行状态
+
+void handleSignal(int signal)
+{
+    g_running = false; // 收到信号时将运行标志置为 false，通知线程退出
+}
 
 std::string stripLineEnd(std::string text)
 {
@@ -336,6 +344,7 @@ void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, Share
         std::this_thread::sleep_for(std::chrono::milliseconds(cfg.period_ms));
     }
 }
+
 /**
  * @brief 程序入口函数。
  *
@@ -357,6 +366,8 @@ void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, Share
  */
 int main(int argc, char const *argv[])
 {
+    std::signal(SIGINT, handleSignal);  // SIGINT  = Ctrl+C
+    std::signal(SIGTERM, handleSignal); // SIGTERM = systemd stop 或 kill 默认信号
     // 默认配置文件路径
     std::string config_path = "./base-client-test.conf";
     // 如果命令行传入了配置文件路径，则优先使用命令行参数
@@ -378,12 +389,35 @@ int main(int argc, char const *argv[])
 
     // 根据配置文件中的日志路径创建日志对象
     Logger logger(cfg.log_file);
-    std::atomic<bool> running(true); // 线程运行标志，控制线程何时退出
+    // 创建共享状态对象。
+    // communicationThread 会负责更新该状态，statusThread 会负责读取该状态并输出监控日志。
     SharedState state;
     std::mutex state_mutex; // 保护共享状态的互斥锁
 
-    std::thread comm_thread(communicationThread, std::cref(cfg), std::ref(running), std::ref(state), std::ref(state_mutex), std::ref(logger));
-    std::thread monitor_thread(statusThread, std::ref(running), std::ref(state), std::ref(state_mutex), std::ref(logger));
+    // 启动通信线程。
+    // communicationThread 负责周期性连接服务端、发送控制命令、接收状态响应，
+    // 并根据通信结果更新共享状态 state。
+    //
+    // 参数说明：
+    // std::cref(cfg)         ：以 const 引用方式传入配置对象，避免复制且线程内不可修改 cfg。
+    // std::ref(g_running)   ：以引用方式传入运行标志，用于控制线程退出。
+    // std::ref(state)       ：以引用方式传入共享状态对象，通信线程会更新它。
+    // std::ref(state_mutex) ：以引用方式传入互斥锁，用于保护共享状态。
+    // std::ref(logger)      ：以引用方式传入日志对象，用于记录通信日志。
+    std::thread comm_thread(communicationThread, std::cref(cfg), std::ref(g_running), std::ref(state), std::ref(state_mutex), std::ref(logger));
+
+    // 启动状态监控线程。
+    // statusThread 负责每隔一段时间读取共享状态 state，
+    // 并将当前连接状态、速度、电池电压、错误信息、安全模式等信息输出到日志。
+    //
+    // 参数说明：
+    // std::ref(g_running)   ：以引用方式传入运行标志，用于控制线程退出。
+    // std::ref(state)       ：以引用方式传入共享状态对象，监控线程会读取它。
+    // std::ref(state_mutex) ：以引用方式传入互斥锁，读取共享状态时需要加锁。
+    // std::ref(logger)      ：以引用方式传入日志对象，用于输出监控日志。
+    std::thread monitor_thread(statusThread, std::ref(g_running), std::ref(state), std::ref(state_mutex), std::ref(logger));
+
+    logger.info("threads started");
     comm_thread.join();
     monitor_thread.join();
     // 记录程序启动日志

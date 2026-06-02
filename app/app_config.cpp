@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:30:12
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-06-01 15:30:43
+ * @最后编辑时间       : 2026-06-02 14:43:06
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -77,11 +77,14 @@ bool loadConfig(const std::string &path, AppConfig &cfg)
         {
             cfg.period_ms = std::stoi(value);
         }
+        else if (key == "control_period_ms")
+        {
+            cfg.control_period_ms = std::stoi(value);
+        }
         else if (key == "recv_timeout_ms")
         {
             cfg.recv_timeout_ms = std::stoi(value);
         }
-
         else if (key == "vx")
         {
             cfg.vx = std::stod(value);
@@ -128,6 +131,7 @@ void printConfig(const AppConfig &cfg)
     std::cout << "server_ip:" << cfg.server_ip << std::endl;
     std::cout << "server_port:" << cfg.server_port << std::endl;
     std::cout << "period_ms:" << cfg.period_ms << std::endl;
+    std::cout << "control_period_ms:" << cfg.control_period_ms << std::endl;
     std::cout << "recv_timeout_ms:" << cfg.recv_timeout_ms << std::endl;
     std::cout << "vx:" << cfg.vx << std::endl;
     std::cout << "vy:" << cfg.vy << std::endl;

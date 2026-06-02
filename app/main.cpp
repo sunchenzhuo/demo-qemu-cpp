@@ -3,7 +3,7 @@
  * @作者           : 树
  * @创建时间         : 2026-05-27 17:29:50
  * @最后编辑         : 树
- * @最后编辑时间       : 2026-06-02 14:24:09
+ * @最后编辑时间       : 2026-06-02 14:50:10
  * @Version      : V1.0.0
  * @功能描述         :
  * @Copyright    : Copyright (c) 2026 by 树, All Rights Reserved.
@@ -209,29 +209,67 @@ void statusThread(std::atomic<bool> &running, SharedState &state, std::mutex &st
     }
 }
 
+/**
+ * @brief 控制命令生成线程函数。
+ *
+ * 该函数通常运行在独立线程中，按照配置中的控制周期
+ * 周期性生成运动控制命令 MotionCommand，并将命令写入线程安全队列。
+ *
+ * 通信线程可以从 command_queue 中获取最新控制命令，
+ * 并将其转换为协议字符串后发送给服务端。
+ *
+ * 当前实现中，vx 会在基础配置值上做小幅变化，用于模拟控制命令动态变化；
+ * vy 和 wz 使用配置文件中的固定值。
+ *
+ * @param cfg 系统配置对象，包含默认速度、控制周期等参数。
+ * @param running 线程运行标志，为 true 时持续运行，为 false 时退出线程。
+ * @param command_queue 控制命令队列，用于在线程之间传递 MotionCommand。
+ * @param logger 日志对象，用于记录控制命令生成和入队日志。
+ */
 void controlThread(const AppConfig &cfg, std::atomic<bool> &running, ThreadSafeQueue<MotionCommand> &command_queue, Logger &logger)
 {
+    // 控制命令计数器。
+    // 用于记录当前已经生成了多少条控制命令。
     int count = 0;
+    // 主循环：只要 running 为 true，控制线程就持续生成控制命令。
     while (running)
     {
+        // 创建一条运动控制命令。
         MotionCommand cmd;
-        cmd.vx = cfg.vx;
+        // 设置 x 方向速度。
+        // cfg.vx 是配置文件中的基础速度。
+        // 0.01 * (count % 5) 用于模拟速度的小幅周期性变化。
+        //
+        // 例如 count % 5 的结果会在 0、1、2、3、4 之间循环，
+        // 所以 vx 会在 cfg.vx、cfg.vx+0.01、cfg.vx+0.02...
+        // 之间变化。
+        cmd.vx = cfg.vx + 0.01 * (count % 5); // 模拟控制命令变化
+        // 设置 y 方向速度，当前直接使用配置文件中的固定值。
         cmd.vy = cfg.vy;
+        // 设置 z 轴角速度，当前直接使用配置文件中的固定值。
         cmd.wz = cfg.wz;
 
+        // 将生成好的控制命令写入线程安全队列。
+        // 通信线程后续会从该队列中取出命令并发送给服务端。
         command_queue.push(cmd);
 
+        // 拼接控制命令日志。
+        // 记录当前命令序号以及 vx、vy、wz，方便调试控制命令是否按预期生成。
         std::ostringstream oss;
         oss << "control push command count=" << count
             << " ,vx=" << cmd.vx
             << " ,vy=" << cmd.vy
             << " ,wz=" << cmd.wz;
+
+        // 输出控制命令入队日志。
         logger.info(oss.str());
 
         count++;
-        std::this_thread::sleep_for(std::chrono::milliseconds(cfg.period_ms));
+        // 按配置的控制周期休眠，避免线程高速循环占用 CPU。
+        std::this_thread::sleep_for(std::chrono::milliseconds(cfg.control_period_ms));
     }
 }
+
 /**
  * @brief 通信线程函数，负责周期性与服务端进行 TCP 通信并更新共享状态。
  *
@@ -300,7 +338,7 @@ void communicationThread(const AppConfig &cfg, std::atomic<bool> &running, Threa
             }
             else
             {
-                logger.info("use command form queue");
+                logger.info("use command from queue");
             }
         }
 
